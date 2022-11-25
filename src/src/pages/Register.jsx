@@ -1,23 +1,24 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { useAuth } from "../components/context/AuthContext";
 
-function Login() {
+function Register() {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    fName: "",
+    lName: "",
   });
-  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
   const [checkboxType, setCheckboxType] = useState("password");
-  const { login } = useAuth();
+
   const navigate = useNavigate();
 
-  // logic
+  //   logic
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
@@ -34,21 +35,44 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoginError("");
+    setRegisterError("");
     try {
-      await login(user.email, user.password);
-      navigate("/dashboard");
+      await signUp(user.email, user.password, user.fName, user.lName);
+      navigate("/login");
     } catch (error) {
-      console.log(error.message);
-      setLoginError("Wrong email");
+      if (
+        error.code === "auth/email-already-in-use" ||
+        error.code === "auth/internal-error"
+      )
+        setRegisterError("Correo inválido");
     }
   };
 
   return (
     <>
-      {loginError && <Alert variant="danger">{loginError}</Alert>}
+      {registerError && <Alert variant="danger">{registerError}</Alert>}
       <Row className="p-2 justify-content-center min-vh-100 mt-5">
         <Col as={Form} onSubmit={handleSubmit} xs={12} md={4}>
+          <Form.Group className="mb-3" controlId="formBasicFirstName">
+            {/* <Form.Label>Name</Form.Label> */}
+            <Form.Control
+              type="text"
+              placeholder="Enter your first name"
+              onChange={handleChange}
+              name="fName"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicLastName">
+            {/* <Form.Label>Last name</Form.Label> */}
+            <Form.Control
+              type="text"
+              placeholder="Enter your last name"
+              onChange={handleChange}
+              name="lName"
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             {/* <Form.Label>Email address</Form.Label> */}
             <Form.Control
@@ -60,7 +84,7 @@ function Login() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            {/*  <Form.Label>Password</Form.Label> */}
+            {/* <Form.Label>Password</Form.Label> */}
             <Form.Control
               type={checkboxType}
               placeholder="Password"
@@ -77,13 +101,13 @@ function Login() {
           </Form.Group>
 
           <div className="d-grid">
-            <Button type="submit" className="btn-success opacity-75 py-1">
-              Login
+            <Button type="submit" className="btn-success opacity-75  py-1">
+              Register
             </Button>
           </div>
-          <div className="d-flex justify-content-center ">
-            <Link className="text-decoration-none" to={"/register"}>
-              Don't have an account? Create one!
+          <div className="d-flex justify-content-center">
+            <Link className="text-decoration-none" to={"/login"}>
+              Aready registered? Login
             </Link>
           </div>
         </Col>
@@ -91,5 +115,4 @@ function Login() {
     </>
   );
 }
-
-export default Login;
+export default Register;

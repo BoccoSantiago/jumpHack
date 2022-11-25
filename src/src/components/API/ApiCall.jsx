@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const url = "https://jsonplaceholder.typicode.com/todos";
+const url = "http://localhost:3000/products";
 
 const ReqStatus = {
   INITIAL: "INITIAL",
@@ -18,7 +18,7 @@ export default function ApiCall() {
     fetch(url)
       .then((response) => response.json())
       .then((elem) => {
-        setData(elem.slice(0, 50)); //PRIMEROS 50 OBJETOS
+        setData(elem.data);
         setReqStatus(ReqStatus.SUCCESS);
       })
       .catch((e) => {
@@ -32,7 +32,7 @@ export default function ApiCall() {
 
   return (
     <div>
-      {reqStatus === ReqStatus.LOADING ? (
+      {/*  {reqStatus === ReqStatus.LOADING ? (
         <p>LOADING...</p>
       ) : (
         data.map((data) => (
@@ -44,7 +44,7 @@ export default function ApiCall() {
             </ul>
           </div>
         ))
-      )}
+      )} */}
     </div>
   );
 }
