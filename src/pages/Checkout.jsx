@@ -4,7 +4,7 @@ import "./Checkout.css";
 import ModalCheckout from "../components/ModalCheckout/ModalCheckout";
 
 export default function Checkout({ cart }) {
-  const price = cart.reduce((item, a) => item + a.price, 0);
+  const price = cart.reduce((acc, a) => acc + a.price, 0);
   console.log(price);
   return (
     <div className="check-container">
@@ -23,9 +23,7 @@ export default function Checkout({ cart }) {
           <h3 style={{ textAlign: "right" }}>Total: {price}</h3>
         </div>
         <div style={{ textAlign: "center" }}>
-          <Button className="btn-success m-2">
-            <ModalCheckout />
-          </Button>
+          <ModalCheckout />
         </div>
       </div>
     </div>

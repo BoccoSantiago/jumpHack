@@ -5,35 +5,35 @@ import ProductCard from "../components/ProductCard/ProductCard";
 
 const singleProduct = {
   id: 1,
-  name: "Product 1",
+  name: "Aceite",
   type: "Beverage",
   price: 400,
   cusine: "Thai",
-  quantity: 0,
+  img: "https://www.lechepuleva.es/documents/13930/203222/aceite_oliva_g.jpg",
 };
 const singleProduct2 = {
   id: 2,
-  name: "Product 1",
-  type: "Beverage",
+  name: "Sopa",
+  type: "Food",
   price: 300,
   cusine: "Thai",
-  quantity: 0,
+  img: "https://www.despensa.es/documents/10180/10736/320212_G.jpg",
 };
 const singleProduct3 = {
   id: 3,
-  name: "Product 1",
-  type: "Beverage",
+  name: "Arroz",
+  type: "Food",
   price: 200,
   cusine: "Thai",
-  quantity: 0,
+  img: "https://cazaclientes.es/wp-content/uploads/2019/12/arroz-basmati-aromatico-hacendado-mercadona-1.jpg",
 };
 const singleProduct4 = {
   id: 4,
-  name: "Product 1",
-  type: "Beverage",
+  name: "Fideos",
+  type: "Food",
   price: 100,
   cusine: "Thai",
-  quantity: 0,
+  img: "https://www.unileverfoodsolutions.es/dam/global-ufs/mcos/spain/custom/product-images/70-es-684367/spaghetti_knorr_producto.jpg",
 };
 const products = [
   singleProduct,
@@ -42,8 +42,9 @@ const products = [
   singleProduct4,
 ];
 
+console.log(products);
+
 const ProductList = ({ cart, setCart }) => {
-  console.log(cart);
   return (
     <>
       <h2 className="heading-product-list">Product List Page</h2>
@@ -53,7 +54,7 @@ const ProductList = ({ cart, setCart }) => {
           {products.map((product, index) => (
             <ProductCard
               cart={cart}
-              cartSetter={setCart}
+              setCart={setCart}
               product={product}
               key={`${product.name}_${index}`}
             />

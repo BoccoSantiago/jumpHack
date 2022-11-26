@@ -27,10 +27,22 @@ export default function CartModal({ cart }) {
         </Modal.Header>
         <Modal.Body>
           <p>List of products</p>
-          {cart.length > 0 && <p>Hola </p>}
-          {cart.map((item) => {
-            <p>{item.name}</p>;
-          })}
+          {cart.length > 0 &&
+            cart.map((item) => {
+              return (
+                <div>
+                  <span>
+                    <img
+                      src={item.img}
+                      style={{ width: "50px", padding: "0 5px" }}
+                    />
+                  </span>
+                  <span>{item.name} - </span>
+                  <span>${item.price} -</span>
+                  <span>{item.quantity} 0</span>
+                </div>
+              );
+            })}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
