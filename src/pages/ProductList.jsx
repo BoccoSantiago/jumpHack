@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProductList.css";
 import ProductCard from "../components/ProductCard/ProductCard";
-import ApiCall from "../components/API/ApiCall";
+//import ApiCall from "../components/API/ApiCall";
 
 const singleProduct = {
   id: 1,
@@ -48,7 +48,7 @@ const ProductList = ({ cart, setCart }) => {
     <>
       <h2 className="heading-product-list">Product List Page</h2>
       <div className="product-list-view">
-        <ApiCall />
+        {/*  <ApiCall /> */}
         <div className="product-list-box">
           {products.map((product, index) => (
             <ProductCard
