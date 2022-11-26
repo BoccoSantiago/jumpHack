@@ -8,7 +8,38 @@ const ProductCard = ({ product, setCart, cart }) => {
     return setCart(arrayWithoutRemovedItem);
   };
 
+  const addToCart = (id) => {
+    if (product.id === id) {
+      if (newArray.indexOf(product) > -1) {
+        product.quantity++;
+      } else {
+        newArray.push(product);
+        product.quantity = 1;
+      }
+    }
+
+    setCart(newArray);
+    console.log(cart.length);
+  };
+
+  /*  function addToCart(id) {
+    for (let item of cart) {
+      if (item.id === id) {
+        if (cart.indexOf(item) > -1) {
+          item.quantity++;
+        } else {
+          cart.push(item);
+          item.quantity = 1;
+        }
+        console.log(cart.indexOf(item) > -1);
+        console.log(cart.length);
+        console.log(cart);
+      }
+    }
+  } */
+
   const newArray = [...cart];
+  console.log("new", newArray);
   return (
     <div className="product-card-item">
       <img className="product-image" src={product.img} alt="img" />
@@ -28,12 +59,8 @@ const ProductCard = ({ product, setCart, cart }) => {
           -
         </button>
         <button
-          onClick={() => {
-            newArray.push(product);
-            setCart(newArray);
-            console.log(cart.length);
-          }}
           className="cart-button-add"
+          onClick={() => addToCart(product.id)}
         >
           +
         </button>

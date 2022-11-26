@@ -28,9 +28,9 @@ export default function CartModal({ cart }) {
         <Modal.Body>
           <p>List of products</p>
           {cart.length > 0 &&
-            cart.map((item) => {
+            cart.map((item, id) => {
               return (
-                <div>
+                <div key={id}>
                   <span>
                     <img
                       src={item.img}
